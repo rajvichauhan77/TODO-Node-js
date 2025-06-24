@@ -12,7 +12,24 @@ app.use(express.urlencoded())
 
 app.set("view engine", "ejs")
 
-app.get()
+app.post("/updateData", (req,res) => {
+    console.log(req.body)
+
+    data = data.map((ele) => {
+        if(ele.id == req.body.id){
+            ele.name = req.body.name
+        }
+        return ele
+    })
+        return res.redirect("/")
+})
+
+app.get("/edit", (req, res) => {
+    let user = data.find((ele) => ele.id == req.query.id)
+    res.render("update", {
+        user
+    })
+})
 
 
 app.get("/delete/:id", (req,res) => {
